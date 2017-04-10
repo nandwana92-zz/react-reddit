@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import FontAwesome from 'react-fontawesome';
 import glamorous from 'glamorous';
+import { css } from 'glamor';
 import isNil from 'lodash/isNil';
 
 import './SubredditListItem.css';
 import snoo from './snoo';
+import VoteButton from './VoteButton';
 
 const { Div, Span, Button, A, B, Img } = glamorous;
 
@@ -13,9 +15,11 @@ class SubredditListItem extends React.Component {
     let userScore;
     const voted = !isNil(this.props.item.data.likes);
     const likes = this.props.item.data.likes;
+    let vote = null;
 
     if (voted) {
       userScore = likes ? 1 : -1;
+      vote = likes ? 'up' : 'down';
     } else {
       userScore = 0;
     }
@@ -27,17 +31,9 @@ class SubredditListItem extends React.Component {
         <Div flex="none" display="flex" flexDirection="row" justifyContent="space-around" alignItems="center" padding="10px" width="100px">
           <B margin="0 10px">{this.props.index + 1}</B>
           <Div display="flex" flexDirection="column">
-            <Button fontSize="18px" flex="none" marginBottom="2px" marginTop="2px">
-              <Span color={(voted && likes && scoreBg) || '#9E9E9E'}>
-                <FontAwesome name="arrow-up" />
-              </Span>
-            </Button>
+            <VoteButton vote={vote} buttonType="up" />
             <Span fontWeight="bold" color={scoreBg}>{this.props.item.data.score + userScore}</Span>
-            <Button fontSize="18px" flex="none" marginBottom="2px" marginTop="2px">
-              <Span color={(voted && !likes && scoreBg) || '#9E9E9E'}>
-                <FontAwesome name="arrow-down" />
-              </Span>
-            </Button>
+            <VoteButton vote={vote} buttonType="down" />
           </Div>
         </Div>
         <Div flex="none" display="flex" flexDirection="column" justifyContent="center">

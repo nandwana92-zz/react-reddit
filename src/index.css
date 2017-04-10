@@ -11,6 +11,6 @@ html {
   box-sizing: inherit;
 }
 
-button {
+button, [role="button"] {
   cursor: pointer;
 }
