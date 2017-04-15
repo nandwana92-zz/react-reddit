@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import glamorous from 'glamorous'
+import { Link } from 'react-router-dom';
 
 import Constants from './Constants.json'
 
@@ -24,6 +25,9 @@ class Login extends Component {
 
     return (
       <Div position="fixed" top="24px" right="24px">
+        <Link to="/">
+          home
+        </Link>
         {elem}
       </Div>
     );;

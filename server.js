@@ -20,7 +20,7 @@ app.use('/protected_api', proxy({
   changeOrigin: true
 }));
 
-app.listen(3001);
+app.listen(8001);
 
 // http://localhost:3000/api/foo/bar -> http://www.example.org/api/foo/bar
 

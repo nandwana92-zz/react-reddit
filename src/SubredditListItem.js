@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
 import glamorous from 'glamorous';
 import { css } from 'glamor';
 import isNil from 'lodash/isNil';
+import TimeAgo from 'react-timeago';
 
 import './SubredditListItem.css';
 import snoo from './snoo';
-import VoteButton from './VoteButton';
+
+import VoteButtonContainer from './VoteButtonContainer';
 
 const { Div, Span, Button, A, B, Img } = glamorous;
 
@@ -27,13 +30,13 @@ class SubredditListItem extends React.Component {
     const scoreBg = voted ? (likes ? '#FF8B60' : '#9494FF') : '#9E9E9E';
 
     return (
-      <Div backgroundColor="#F5F5F5" height="80px" margin="20px 0" display="flex" flexDirection="row">
+      <Div overflow="hidden" backgroundColor="#F5F5F5" height="100px" margin="20px 0" display="flex" flexDirection="row">
         <Div flex="none" display="flex" flexDirection="row" justifyContent="space-around" alignItems="center" padding="10px" width="100px">
           <B margin="0 10px">{this.props.index + 1}</B>
           <Div display="flex" flexDirection="column">
-            <VoteButton vote={vote} buttonType="up" />
+            <VoteButtonContainer itemId={this.props.itemId} item={this.props.item} updateListItem={this.props.updateListItem} likes={likes} vote={vote} buttonType="up" />
             <Span fontWeight="bold" color={scoreBg}>{this.props.item.data.score + userScore}</Span>
-            <VoteButton vote={vote} buttonType="down" />
+            <VoteButtonContainer itemId={this.props.itemId} item={this.props.item} updateListItem={this.props.updateListItem} likes={likes} vote={vote} buttonType="down" />
           </Div>
         </Div>
         <Div flex="none" display="flex" flexDirection="column" justifyContent="center">
@@ -46,6 +49,13 @@ class SubredditListItem extends React.Component {
           <A target="_blank" color="#0000ff" href={this.props.item.data.url}>
           {this.props.item.data.title}
           </A>
+          <Div>
+            <TimeAgo date={this.props.item.data.created_utc * 1000} /> by {this.props.item.data.author} in {this.props.item.data.subreddit_name_prefixed}
+            <br />
+            <Link to={`/${this.props.item.data.subreddit}/${this.props.item.data.id}`}>
+              {this.props.item.data.num_comments} comments
+            </Link>
+          </Div>
         </Div>
       </Div>
     );

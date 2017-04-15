@@ -6,6 +6,7 @@ import isNil from 'lodash/isNil';
 import RedditFrontPage from './RedditFrontPage';
 import Login from './Login';
 import Callback from './Callback';
+import Post from './Post';
 
 class CommonParent extends Component {
   constructor(props) {
@@ -34,7 +35,8 @@ class CommonParent extends Component {
     return (
       <div className="App">
         <Login isLoggedIn={this.state.isLoggedIn} setLoggedInState={this.setLoggedInState} />
-        <RedditFrontPage isLoggedIn={this.state.isLoggedIn} />
+        <Route path="/:subreddit/:id" render={(props) => <Post {...props} isLoggedIn={this.state.isLoggedIn} />} />
+        <Route exact path="/" render={() => <RedditFrontPage isLoggedIn={this.state.isLoggedIn} />} />
         <Route path="/callback" render={() => <Callback isLoggedIn={this.state.isLoggedIn} setLoggedInState={this.setLoggedInState} />} />
       </div>
     );
