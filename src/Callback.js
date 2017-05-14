@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, NavLink, Redirect } from 'react-router-dom';
 import axios from 'axios';
 
+import { initializeSnooWrap, getSnooWrapInstance, get } from './wrapperThing';
 import getHashParams from './utils/getHashParams';
 import Constants from './Constants.json'
 
@@ -20,7 +21,16 @@ class Callback extends Component {
         }
       })
       .then((response) => {
+        console.log(getSnooWrapInstance());
+        const snooWrapCredentials = {
+          clientId: 'PbFHdvJmUVND5g',
+          clientSecret: '',
+          refreshToken: response.data['refresh_token']
+        };
+        initializeSnooWrap(snooWrapCredentials);
+        console.log(getSnooWrapInstance());
         const bearerToken = response.data['access_token'];
+        localStorage.setItem('snooWrapCredentials', JSON.stringify(snooWrapCredentials));
         localStorage.setItem('bearerToken', bearerToken);
         const AUTH_TOKEN = `bearer ${bearerToken}`;
         axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;

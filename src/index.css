@@ -14,3 +14,30 @@ html {
 button, [role="button"] {
   cursor: pointer;
 }
+
+button[disabled] {
+  cursor: not-allowed;
+}
+
+.custom-button {
+  font-family: 'Open Sans', sans-serif;
+  box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+  /*display: inline-block;*/
+  padding: 5px 10px;
+  border-radius: 3px;
+  border: none;
+  transition-duration: 0.15s;
+  cursor: pointer;
+  background-color: #6772e5;
+  color: #fff;
+}
+
+.custom-button:hover {
+  transform: translateY(-1px);
+  background-color: #7795f8;
+}
+
+.custom-button:active {
+  transform: translateY(1px);
+  background-color: #555abf;
+}

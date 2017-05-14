@@ -12,16 +12,21 @@ const buttonColors = {
 
 const VoteButton = ({ vote, buttonType, onClick }) => {
   const voteButtonStyle = css({
+    'transitionDuration': '0.15s',
+    ':hover': {
+      transform: `translateY(${buttonType === 'up' ? '-' : ''}1px)`
+    },
     ':active': {
       textShadow: '#9e9e9e 1px 2px 2px',
-      color: buttonColors[buttonType]
+      color: buttonColors[buttonType],
+      transform: `translateY(${buttonType === 'up' ? '' : '-'}1px)`
     }
   });
 
   const btnColor = (buttonType === vote && buttonColors[vote]) || '#9E9E9E';
 
   return (
-    <Span transition="all 0.25s" alignSelf="center" fontSize="18px" flex="none" marginBottom="2px" marginTop="2px" color={btnColor} className={`${voteButtonStyle}`} role="button" onClick={() => onClick(buttonType)}>
+    <Span alignSelf="center" fontSize="18px" flex="none" marginBottom="2px" marginTop="2px" color={btnColor} className={`${voteButtonStyle}`} role="button" onClick={() => onClick(buttonType)}>
       <FontAwesome name={`arrow-${buttonType}`} />
     </Span>
   );

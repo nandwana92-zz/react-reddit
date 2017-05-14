@@ -14,7 +14,7 @@ class CommentList extends React.Component {
         {
           map(this.props.kids, (value, index) => {
             return (
-              <Comment postFullName={this.props.postFullName} isLoggedIn={this.props.isLoggedIn} flatComments={this.props.flatComments} commentHierarchy={this.props.commentHierarchy} key={value.commentId} even={this.props.even} kids={value.kids} item={this.props.flatComments[value.commentId]} />
+              <Comment loadMoreComments={this.props.loadMoreComments} postFullName={this.props.postFullName} isLoggedIn={this.props.isLoggedIn} flatComments={this.props.flatComments} commentHierarchy={this.props.commentHierarchy} commentId={value.commentId} key={value.commentId} even={this.props.even} kids={value.kids} item={this.props.flatComments[value.commentId]} />
             );
           })
         }
